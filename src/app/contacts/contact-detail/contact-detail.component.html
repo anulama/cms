@@ -1,0 +1,28 @@
+<div class="panel plane-default" style="border: 1px solid lightgray;">
+    <div class="panel-heading" style="background-color: whitesmoke">
+        <h3>{{ contact?.name }}</h3>
+        <div class="row pad-all" style="padding-right:10px; padding-left: 10px;">
+            <div class="clear-fix pull-left">
+                <img class="img-responsive" src="{{ contact?.imageUrl }}" />
+            </div>
+            <div class="pull-right">
+                <button class="btn btn-primary" style="margin: 5px;">Edit</button>
+                <button class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+
+<div class="panel-body">
+    <div class="pad-left-right">
+        <div class="row">
+            <label style="padding-left: 10px;">Email:</label>
+            <span class="label-value">{{ contact?.email }}</span>
+        </div>
+        
+        <div class="row">
+            <label style="padding-left: 10px;">Phone:</label>
+            <span class="label-value">{{ contact?.phone }}</span>
+        </div>
+    </div>
+</div>
+</div>
