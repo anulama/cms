@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
 import { Contact } from '../contact.model';
+import { Component, OnInit, Input } from '@angular/core';
+  import { from } from 'rxjs';
 
 @Component({
-  selector: 'app-contact-detail',
+  selector: 'cms-contact-detail',
   templateUrl: './contact-detail.component.html',
   styleUrls: ['./contact-detail.component.css']
 })

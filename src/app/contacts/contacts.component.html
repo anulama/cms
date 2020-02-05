@@ -1,11 +1,23 @@
-<div class="container">
 <div class="row">
-    <div class="col-md-5">
+    <!--<div class="row">
+      <div class="col-md-5">
+        <app-contact-list></app-contact-list>
+      </div>
+      <div class="col-md-5">
+        <a class="btn btn-sm btn-default" (click)="toggleList()" style="margin-top: 1rem; margin-bottom: 1rem">Toggle Details</a>-->
+        <!--<app-contact-detail></app-contact-detail>
+        </div>
+      </div>-->
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-5">
         <app-contact-list (selectedContactEvent)="selectedContact = $event"></app-contact-list>
+      </div>
+      <div class="col-md-5">
+        <cms-contact-detail
+          *ngIf="selectedContact"
+          [contact]="selectedContact"></cms-contact-detail>
+      </div>
+      <div class="col-md-1"></div>
     </div>
-    <div class="col-md-7">
-        <!-- <app-contact-detail [contact]="selectedContact" *ngIf="selectedContact"></app-contact-detail> -->
-        <app-contact-detail></app-contact-detail>
-    </div>
-</div>
 </div>
