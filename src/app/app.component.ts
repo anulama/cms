@@ -9,7 +9,6 @@ import { from } from 'rxjs';
 
 export class AppComponent {
   title = 'cms';
-  // title = 'cms';
   selectedFeature: string = 'documents';
 
   switchView(selectedFeature: string){

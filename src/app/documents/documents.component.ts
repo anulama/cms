@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Document} from './documents.model';
 
 @Component({
   selector: 'cms-documents',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DocumentsComponent implements OnInit {
 
+  selectDocument: Document;
+  displaylist = false;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  toggleList(){
+    this.displaylist = !this.displaylist;
   }
 
 }
