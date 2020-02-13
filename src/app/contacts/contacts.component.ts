@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Contact } from './contact.model';
+import { ContactService } from './contact.service';
+import { Injectable } from '@angular/core';
 
 @Component({
   selector: 'cms-contacts',
@@ -8,15 +10,14 @@ import { Contact } from './contact.model';
 })
 export class ContactsComponent implements OnInit {
   selectedContact: Contact;
-  displaylist = false;
 
-  constructor() { }
+  constructor(private contactService: ContactService) { }
 
   ngOnInit() {
+    this.contactService.contactSelectedEvent
+    .subscribe(
+      (contact: Contact) => {
+      this.selectedContact = contact;
+    });
   }
-
-  toggleList(){
-    this.displaylist = !this.displaylist;
-  }
-
 }

@@ -1,15 +1,15 @@
 export class Message {
 
-    id: String;
-    subject: String;
-    msgText: String;
-    sender: String;
+    id: string;
+    subject: string;
+    msgText: string;
+    sender: string;
   
     constructor (
-      id: String,
-      subject: String,
-      msgText: String,
-      sender: String
+      id: string,
+      subject: string,
+      msgText: string,
+      sender: string
     ) {
       this.id = id;
       this.subject = subject;

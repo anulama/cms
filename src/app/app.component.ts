@@ -13,6 +13,7 @@ export class AppComponent {
 
   switchView(selectedFeature: string){
     this.selectedFeature = selectedFeature;
+    console.log(this.selectedFeature)
   }
 
 
