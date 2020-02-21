@@ -1,28 +1,16 @@
-<div class="panel plane-default" style="border: 1px solid lightgray;">
-    <div class="panel-heading" style="background-color: whitesmoke">
-        <h3>{{ contact?.name }}</h3>
-        <div class="row pad-all" style="padding-right:10px; padding-left: 10px;">
-            <div class="clear-fix pull-left">
-                <img class="img-responsive" src="{{ contact?.imageUrl }}" />
-            </div>
-            <div class="pull-right">
-                <button class="btn btn-primary" style="margin: 5px;">Edit</button>
-                <button class="btn btn-danger">Delete</button>
-            </div>
-        </div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+      <h2>{{contact.name}}</h2>
+      <div class="flex-container">
+        <img src="{{contact.imageUrl}}" alt="{{contact.name}}" style="margin-right: 150px;">
+          <!-- <a class="btn btn-primary">Edit</a>&nbsp;
+          <a class="btn btn-danger">Delete</a> -->
+        <a class="btn btn-primary" routerLink="edit">Edit</a>
+        <a class="btn btn-danger" (click)="onDelete()">Delete</a>
+      </div>
     </div>
-
-<div class="panel-body">
-    <div class="pad-left-right">
-        <div class="row">
-            <label style="padding-left: 10px;">Email:</label>
-            <span class="label-value">{{ contact?.email }}</span>
-        </div>
-        
-        <div class="row">
-            <label style="padding-left: 10px;">Phone:</label>
-            <span class="label-value">{{ contact?.phone }}</span>
-        </div>
+    <div class="panel-body">
+      <div><strong>Email:</strong> {{contact.email}}</div>
+      <div><strong>Phone:</strong> {{contact.phone}}</div>
     </div>
-</div>
-</div>
+  </div>

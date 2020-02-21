@@ -8,13 +8,15 @@ import { from } from 'rxjs';
 })
 
 export class AppComponent {
-  title = 'cms';
-  selectedFeature: string = 'documents';
+  // title = 'cms';
+  // selectedFeature: string = 'documents';
 
-  switchView(selectedFeature: string){
-    this.selectedFeature = selectedFeature;
-    console.log(this.selectedFeature)
-  }
+  title = "WeLearn CMS!";
+
+  // switchView(selectedFeature: string){
+  //   this.selectedFeature = selectedFeature;
+  //   console.log(this.selectedFeature)
+  // }
 
 
 }

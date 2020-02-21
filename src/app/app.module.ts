@@ -16,9 +16,14 @@ import { MessageListComponent } from './messages/message-list/message-list.compo
 import { MessagesComponent } from './messages/messages.component';
 import { DropdownDirective } from './shared/app.dropdown.directive';
 
+import { AppRoutingModule } from './app-routing.module';
+import { WindRefService } from './wind-ref.service';
 import { ContactService } from './contacts/contact.service';
 import { DocumentService } from './documents/document.service';
 import { MessageService } from './messages/message.service';
+import { DocumentEditComponent } from './documents/document-edit/document-edit.component';
+import { DocumentViewComponent } from './documents/document-view/document-view.component';
+import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
 
 @NgModule({
   declarations: [
@@ -37,11 +42,20 @@ import { MessageService } from './messages/message.service';
     MessageListComponent,
     MessagesComponent,
     DropdownDirective,
+    DocumentEditComponent,
+    DocumentViewComponent,
+    ContactEditComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    ContactService,
+    DocumentService,
+    MessageService,
+    WindRefService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
