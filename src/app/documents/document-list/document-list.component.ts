@@ -32,8 +32,8 @@ export class DocumentListComponent implements OnInit {
     );
   }
 
-onNewDocument(){
-  this.router.navigate(['new'], {relativeTo: this.activatedRoute});
+ngOnDestroy(): void {
+  this.subscription.unsubscribe();
 }
 
 }
