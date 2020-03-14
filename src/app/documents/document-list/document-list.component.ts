@@ -1,8 +1,8 @@
 //import { Component, OnInit } from '@angular/core';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Document } from '../documents.model';
 import { DocumentService} from '../document.service';
-import { Router, ActivatedRoute } from '@angular/router';
+//import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 
@@ -19,21 +19,28 @@ export class DocumentListComponent implements OnInit {
   subscription: Subscription;
   
 
-  constructor(private documentService: DocumentService,
-              private router: Router,
-              private activatedRoute: ActivatedRoute,) { }
+  constructor(private documentService: DocumentService) {
+              // private router: Router,
+              // private activatedRoute: ActivatedRoute,) { }
+              this.subscription = this.documentService.documentListChangedEvent
+              .subscribe(
+                (documents: Document[]) => {
+                  this.documents = documents;
+                }
+              );
+              this.documents = this.documentService.getDocuments();
+  }
 
-  ngOnInit() {
-    this.documents = this.documentService.getDocuments();
-    this.subscription = this.documentService.documentChangedEvent.subscribe(
+  ngOnInit(){
+    this.subscription = this.documentService.documentListChangedEvent
+    .subscribe(
       (documentList: Document[]) => {
         this.documents = documentList;
       }
-    );
+    )
   }
 
-ngOnDestroy(): void {
-  this.subscription.unsubscribe();
-}
-
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }

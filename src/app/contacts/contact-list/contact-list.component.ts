@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { Contact } from '../contact.model';
 import { ContactService } from '../contact.service';
-import { Router, ActivatedRoute } from '@angular/router';
+//import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -13,9 +13,9 @@ export class ContactListComponent implements OnInit {
   contacts: Contact[] = [];
   subscription: Subscription;
   
-    constructor(private contactService: ContactService,
-                private router: Router,
-                private activatedRoute: ActivatedRoute,) { }
+    constructor(private contactService: ContactService){}
+               // private router: Router,
+                //private activatedRoute: ActivatedRoute,) { }
     
     ngOnInit() {
       this.contacts = this.contactService.getContacts();
@@ -24,12 +24,13 @@ export class ContactListComponent implements OnInit {
           this.contacts = contactList;
         }
       );
+      this.contacts = this.contactService.getContacts();
     }
     
-    ngOnDestroy(): void {
-      this.subscription.unsubscribe();
+   // ngOnDestroy(): void {
+     // this.subscription.unsubscribe();
     }
 
-   }
+  
     
 

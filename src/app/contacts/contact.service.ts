@@ -66,7 +66,7 @@ export class ContactService {
   }
   
   deleteContact(contact: Contact) {
-    if(contact == null) {
+    if(!contact || !this.contacts.includes(contact)) {
       return;
     }
     
