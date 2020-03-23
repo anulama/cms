@@ -1,24 +1,30 @@
 <div class="panel planel-default" style="border: 1px solid lightgray;">
-    <div class="panel-heading" style="background-color: whitesmoke;">
-      <div class="row pad-left-right" style="padding-right: 10px; padding-left: 10px;">
-        <div class="span pull-left title"><span style="font-size: 25px; font-weight: bold">Contacts</span>
-        </div>
-        <button class="btn btn-success pull-right">New Contact</button>
+  <div class="panel-heading" style="background-color: whitesmoke;">
+    <div class="row pad-left-right" style="padding-right: 10px; padding-left: 10px;">
+      <div class="span pull-left title"><span style="font-size: 25px; font-weight: bold">Contacts</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-group pull-left pad-left-right col-xs-7">
+
+        <input type="text" #searchBox class="form-control" placeholder="Enter search value"
+          (keyup)="onKeyPress(searchBox.value)">
+        <div class="glyphicon glyphicon glyphicon-search input-group-addon" (click)="search(searchBox.value)"></div>
+
+      </div>
+      <div class="pull-right pad-left-right">
+        <a class="btn btn-success" [routerLink]="['new']">New Contact</a>
       </div>
     </div>
     <div class="panel-body">
       <div class="row">
         <div class="col-xs-12">
 
-          <cms-contact-item
-            *ngFor="let contactD of contacts"
-            [contact]="contactD"
-            dnd-draggable
-            [dragEnabled]="true"
-            [dragData]="contactD"
-            [dropZones]="['contactGroup']">
+          <cms-contact-item *ngFor="let contactD of contacts | contactsFilter:term" [contact]="contactD" dnd-draggable
+            [dragEnabled]="true" [dragData]="contactD" [dropZones]="['contactGroup']">
           </cms-contact-item>
         </div>
       </div>
     </div>
+  </div>
 </div>

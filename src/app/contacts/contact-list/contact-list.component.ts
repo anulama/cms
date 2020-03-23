@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Contact } from '../contact.model';
 import { ContactService } from '../contact.service';
 //import { Router, ActivatedRoute } from '@angular/router';
@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 export class ContactListComponent implements OnInit {
   contacts: Contact[] = [];
   subscription: Subscription;
+  term: string;
   
     constructor(private contactService: ContactService){}
                // private router: Router,
@@ -19,16 +20,18 @@ export class ContactListComponent implements OnInit {
     
     ngOnInit() {
       this.contacts = this.contactService.getContacts();
-      this.subscription = this.contactService.contactChangedEvent.subscribe(
+      this.subscription = this.contactService.contactListChangedEvent.subscribe(
         (contactList: Contact[])=> {
           this.contacts = contactList;
         }
       );
       this.contacts = this.contactService.getContacts();
     }
+
+    onKeyPress(value: string){
+      this.term = value;
+    }
     
-   // ngOnDestroy(): void {
-     // this.subscription.unsubscribe();
     }
 
   

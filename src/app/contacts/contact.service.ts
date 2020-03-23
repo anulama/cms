@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { MOCKCONTACTS } from './MOCKCONTACTS';
 import { Contact } from './contact.model';
 import { Subject } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -9,17 +10,29 @@ import { Subject } from 'rxjs';
 export class ContactService {
   contacts: Contact[] = [];
   contactSelectedEvent = new EventEmitter<Contact>();
-  contactChangedEvent = new EventEmitter<Contact[]>();
+  // contactChangedEvent = new EventEmitter<Contact[]>();
 
   contactListChangedEvent = new Subject<Contact[]>();
   maxId: number;
 
-  constructor() {
-    this.contacts = MOCKCONTACTS;
+  constructor(private http:HttpClient) {
+    //this.contacts = MOCKCONTACTS;
     this.maxId = this.getMaxId();
   }
   
   getContacts(): Contact[] {
+    this.http.get('https://anucms.firebaseio.com/contacts.json')
+    .subscribe(
+      (contacts: Contact[]) => {
+        this.contacts = contacts;
+        this.maxId = this.getMaxId();
+        this.contactListChangedEvent.next(this.contacts.slice())
+      }
+    );
+    //error function
+    (error: any) => {
+      console.log(error);
+    }
     return this.contacts.slice();
   }
 
@@ -46,7 +59,8 @@ export class ContactService {
       newDoc.id = `${this.maxId++}`;
       this.contacts.push(newDoc);
       let contactsClone = this.contacts.slice();
-      this.contactListChangedEvent.next(contactsClone);
+      //this.contactListChangedEvent.next(contactsClone);
+      this.storeContacts();
     }
   }
 
@@ -60,7 +74,8 @@ export class ContactService {
         newContact.id = originalContact.id;
         this.contacts[pos] = newContact;
         let contactsClone = this.contacts.slice();
-        this.contactListChangedEvent.next(contactsClone);
+       // this.contactListChangedEvent.next(contactsClone);
+       this.storeContacts();
       }
     }
   }
@@ -74,6 +89,18 @@ export class ContactService {
     //this.contacts.splice(pos, 1);
     //this.contactChangedEvent.next(this.contacts.slice());
     let contactsClone = this.contacts.slice();
-    this.contactListChangedEvent.next(contactsClone);
+    //this.contactListChangedEvent.next(contactsClone);
+    this.storeContacts();
+  }
+
+  storeContacts(){
+    let stringToServer = JSON.stringify(this.contacts);
+    let header = new HttpHeaders({
+      "Content-Type":"application/json"
+    });
+    this.http.put('https://anucms.firebaseio.com/contacts.json', stringToServer,{headers:header})
+    .subscribe(result => {
+      this.contactListChangedEvent.next(Object.assign(this.contacts));
+    });
   }
 }
