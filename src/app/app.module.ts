@@ -27,7 +27,8 @@ import { ContactEditComponent } from './contacts/contact-edit/contact-edit.compo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DndModule } from 'ng2-dnd';
 import { ContactsFilterPipe } from './contacts/contacts-filter.pipe';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -56,14 +57,15 @@ import { HttpClientModule } from '@angular/common/http'
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
     DndModule.forRoot(),
+    HttpClientModule,
+
   ],
   providers: [
+    MessageListService,
     ContactService,
-    DocumentService,
-    MessageService,
-    WindRefService
+    WindRefService,
+    ContactDetailComponent
   ],
   bootstrap: [AppComponent]
 })

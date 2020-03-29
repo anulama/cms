@@ -11,16 +11,18 @@ import { ContactService } from '../../contacts/contact.service';
 })
 export class MessageItemComponent implements OnInit {
 @Input() message: Message;
-messageSender: string;
+messageSender: string = "";
+canEdit: boolean = false;
 
   constructor(private messageService: MessageService,
               private contactService: ContactService) { }
 
   ngOnInit() {
-    const contact: Contact = this.contactService.getContact(this.message.sender);
-    console.log(this.message);
-    console.log(contact);
-    this.messageSender = contact.name; 
+    //const contact: Contact = this.contactService.getContact(this.message.sender);
+    //console.log(this.message);
+    //console.log(contact);
+    let contact: Contact = this.contactService.getContact(this.message.sender);
+    this.messageSender = contact ? contact.name: 'contacts not loaded'; 
   }
 
 }

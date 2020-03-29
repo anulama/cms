@@ -47,7 +47,7 @@ export class DocumentService {
 
   updateDocument(originalDoc: Document, newDoc: Document) {
     if (originalDoc && newDoc) {
-      console.log(this.documents);
+     // console.log(this.documents);
 
       let realOrDoc = this.documents.find(doc => {
         return doc.id === originalDoc.id;
@@ -86,7 +86,7 @@ export class DocumentService {
           this.documents.sort((a, b) => (a['name']) ? 1 : (a['name'] > b['name']) ? -1 : 0);
           this.documentListChangedEvent.next(this.documents.slice());
         }, (error: any) => {
-          console.log('Wrong');
+         // console.log('Wrong');
         });
     }
 

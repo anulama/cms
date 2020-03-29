@@ -4,28 +4,24 @@ import { Contact } from './contact.model';
 import { Subject } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ContactService {
-  contacts: Contact[] = [];
-  contactSelectedEvent = new EventEmitter<Contact>();
-  // contactChangedEvent = new EventEmitter<Contact[]>();
-
   contactListChangedEvent = new Subject<Contact[]>();
-  maxId: number;
+  private contacts: Contact[] = [];
+  maxContactId: number;
+  // contactChangedEvent = new EventEmitter<Contact[]>();
 
   constructor(private http:HttpClient) {
     //this.contacts = MOCKCONTACTS;
-    this.maxId = this.getMaxId();
+    this.maxContactId = this.getMaxId();
   }
   
-  getContacts(): Contact[] {
+  getContacts() {
     this.http.get('https://anucms.firebaseio.com/contacts.json')
     .subscribe(
       (contacts: Contact[]) => {
         this.contacts = contacts;
-        this.maxId = this.getMaxId();
+        this.maxContactId = this.getMaxId();
         this.contactListChangedEvent.next(this.contacts.slice())
       }
     );

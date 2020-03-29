@@ -50,6 +50,25 @@ export class ContactEditComponent implements OnInit {
     this.router.navigate(['contacts']);
   }
 
+  onSubmit(form: NgForm) {
+    let values = form.value;
+    let newContact = new Contact(
+      this.contact ? this.contact.id : '0',
+      values.name,
+      values.email,
+      values.phone,
+      values.imageUrl,
+      this.groupContacts
+    );
+    
+    if (this.editMode) {
+      this.contactService.updateContact(this.contact, newContact);
+    } else {
+      this.contactService.addContact(newContact);
+    }
+    this.router.navigate(['contacts']);
+  }
+
   isInvalidContact(newContact: Contact){
     if (!newContact) return true;
     if (newContact.id === this.contact.id) return true;

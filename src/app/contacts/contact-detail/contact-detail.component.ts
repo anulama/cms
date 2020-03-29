@@ -18,9 +18,8 @@ export class ContactDetailComponent implements OnInit {
     this.activatedRoute.params
     .subscribe(
       (params: Params) => {
-        console.log(params)
-        this.contact = this.contactService.getContact(params.id);
-        console.log(this.contact)
+        const id = params['id'];
+        this.contact = this.contactService.getContact(id);
       }
     )
   }
